@@ -98,8 +98,7 @@ python-dotenv==0.19.0
 python-jose==3.4.0
 python-multipart==0.0.20
 pyttsx3==2.98
-pytz==2024.2
-pywin32==306; 
+pytz==2024.2 
 platform_system == "Windows"
 requests==2.26.0
 rich==13.9.4
