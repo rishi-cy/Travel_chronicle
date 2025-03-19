@@ -90,7 +90,6 @@ Pygments==2.19.1
 PyJWT==2.10.1
 pymongo==4.11.2
 pyparsing==3.2.1
-pypiwin32==223
 pytest==6.2.5
 pytest-cov==2.12.1
 python-dateutil==2.9.0.post0
