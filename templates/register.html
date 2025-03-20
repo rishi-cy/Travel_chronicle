@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Travel Chronicle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .register-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .register-container h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .register-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .register-container button {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 16px;
+            min-height: 44px;
+        }
+
+        .register-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: #dc3545;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8d7da;
+            border-radius: 4px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .register-container {
+                padding: 15px;
+            }
+            
+            .register-container h1 {
+                font-size: 20px;
+            }
+            
+            .register-container input,
+            .register-container button {
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h1>Travel Chronicle</h1>
+        {% if error %}
+            <div id="error" class="error" style="display: block;">{{ error }}</div>
+        {% else %}
+            <div id="error" class="error"></div>
+        {% endif %}
+        
+        <form action="/register" method="POST" id="registerForm">
+            <input type="text" name="username" placeholder="Username" required autocomplete="username">
+            <input type="password" name="password" placeholder="Password" required autocomplete="new-password">
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required autocomplete="new-password">
+            <button type="submit">Register</button>
+        </form>
+        <p class="login-link">Already have an account? <a href="/">Login here</a></p>
+    </div>
+
+    <script>
+        // Form validation
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            const username = this.querySelector('input[name="username"]').value.trim();
+            const password = this.querySelector('input[name="password"]').value.trim();
+            const confirmPassword = this.querySelector('input[name="confirm_password"]').value.trim();
+            const errorDiv = document.getElementById('error');
+            
+            if (!username || !password || !confirmPassword) {
+                e.preventDefault();
+                errorDiv.textContent = 'Please fill in all fields';
+                errorDiv.style.display = 'block';
+            } else if (password !== confirmPassword) {
+                e.preventDefault();
+                errorDiv.textContent = 'Passwords do not match';
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // Clear error message when user starts typing
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                document.getElementById('error').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
